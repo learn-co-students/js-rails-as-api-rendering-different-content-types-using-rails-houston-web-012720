@@ -7,6 +7,28 @@
     <title>Document</title>
 </head>
 <body>
-    <div>This HTML file isn't part of the Rails app. It is here to help you test JS against Rails as you follow along.</div>
+    <button id="create_new_bird"></button>
+    <div id ="bird_container">
+        
+    </div>
+    <script>
+        const bird_div = document.querySelector("#bird_container")
+        const display_data = (data) => {
+            let div = document.createElement("div")
+            let h4 = document.createElement("h4")
+            h4.innerText = `Bird name: ${data.name}`
+            let h5 = document.createElement("h5")
+            h5.innerText = `Bird species: ${data.species}`
+            div.append(h4,h5)
+
+            bird_div.append(div)
+        }
+
+        fetch("http://localhost:3000/birds")
+        .then(res => res.json())
+        .then(birds => 
+            birds.forEach(bird => display_data(bird))
+            )
+    </script>
 </body>
 </html>
